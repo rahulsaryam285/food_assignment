@@ -1,12 +1,11 @@
 import 'dart:convert';
 
-import 'package:flutter_food/utils/log.dart';
-
 import '../models/all_dishes_model.dart';
 import '../models/cart_model.dart';
 import '../models/quantity_model.dart';
 import '../models/restaurents_dishes_model.dart';
 import '../repositories/repositories.dart';
+import '../utils/utils.dart';
 
 class HomeViewModel {
   const HomeViewModel(this._repository);

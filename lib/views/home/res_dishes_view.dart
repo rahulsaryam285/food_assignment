@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food/controllers/home/home.dart';
+import 'package:food/views/home/dish_card.dart';
 import 'package:get/get.dart';
 
-import '../../data/remote/apis.dart';
+import '../../controllers/controllers.dart';
 import '../../res/res.dart';
 import '../../utils/enums.dart';
 import '../../widgets/widgets.dart';
@@ -32,140 +32,29 @@ class RestDishesView extends StatelessWidget {
                     itemCount: controller.restaurentsDishe.length,
                     itemBuilder: (context, index) {
                       final dish = controller.restaurentsDishe[index];
-                      return Stack(
-                        alignment: Alignment.bottomCenter,
-                        children: [
-                          SizedBox(
-                            height: Dimens.twoHundredFifty,
-                            width: Dimens.percentWidth(1),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(
-                                Dimens.thirty,
-                              ),
-                              child: Image.network(
-                                '${Apis.imageUrl}${dish.coverImage}',
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: Dimens.edgeInsets10,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      dish.name,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: Dimens.fifteen,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: Dimens.edgeInsets5,
-                                      decoration: BoxDecoration(
-                                          color: Colors.green,
-                                          borderRadius: BorderRadius.circular(
-                                              Dimens.ten)),
-                                      child: Text(
-                                        dish.vote,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: Dimens.fifteen,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                const Divider(),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          dish.price,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: Dimens.fifteen,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Free Delivery',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: Dimens.fifteen,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(
-                                            Dimens.twenty),
-                                      ),
-                                      margin: Dimens.edgeInsets0.copyWith(
-                                          bottom: Dimens.ten,
-                                          right: Dimens.ten),
-                                      height: Dimens.fifty,
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          IconButton(
-                                            onPressed: () {
-                                              controller.addQuantity(
-                                                disheId: dish.id,
-                                                restaurentId: dish.restaurentId,
-                                                type: CartType.minus,
-                                                isAllDishes: false,
-                                              );
-                                            },
-                                            icon: const Icon(
-                                              Icons.remove_outlined,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                          Text(
-                                            '${dish.quantity ?? 0}',
-                                            style: TextStyle(
-                                                fontSize: Dimens.twenty),
-                                          ),
-                                          IconButton(
-                                            onPressed: () {
-                                              controller.addQuantity(
-                                                disheId: dish.id,
-                                                restaurentId: dish.restaurentId,
-                                                type: CartType.add,
-                                                isAllDishes: false,
-                                              );
-                                            },
-                                            icon: const Icon(
-                                              Icons.add,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
+
+                      return DishCard(
+                        onDescreaseTap: () {
+                          controller.addQuantity(
+                            disheId: dish.id,
+                            restaurentId: dish.restaurentId,
+                            type: CartType.minus,
+                            isAllDishes: false,
+                          );
+                        },
+                        onIncreaseTap: () {
+                          controller.addQuantity(
+                            disheId: dish.id,
+                            restaurentId: dish.restaurentId,
+                            type: CartType.add,
+                            isAllDishes: false,
+                          );
+                        },
+                        imageUrl: dish.coverImage,
+                        name: dish.name,
+                        price: dish.price,
+                        quantity: '${dish.quantity ?? 0}',
+                        rating: dish.vote,
                       );
                     },
                     separatorBuilder: (context, index) => Dimens.boxHeight20,

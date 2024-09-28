@@ -1,10 +1,10 @@
-import 'package:flutter_food/utils/utils.dart';
 import 'package:get/get.dart';
 
 import '../../models/all_dishes_model.dart';
 import '../../models/cart_model.dart';
 import '../../models/quantity_model.dart';
 import '../../models/restaurents_dishes_model.dart';
+import '../../utils/utils.dart';
 import '../../view_models/view_models.dart';
 
 class HomeController extends GetxController {

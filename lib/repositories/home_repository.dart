@@ -1,6 +1,5 @@
-import 'package:flutter_food/models/models.dart';
-
 import '../data/data.dart';
+import '../models/models.dart';
 import '../utils/enums.dart';
 
 class HomeRepository {
